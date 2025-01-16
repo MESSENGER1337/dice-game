@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>dice-game</title>
+  </head>
+  <body>
+    <h2>dice-game</h2>
+
+    <div id="gameContainer">
+      <div id="scoreboardContainer">
+        <div>
+          <div class="scoreContainer" id="player1score"></div>
+          <div class="scoreContainer" id="player2score"></div>
+          <div class="scoreContainer" id="player3score"></div>
+          <div class="scoreContainer" id="player4score"></div>
+        </div>
+        <div>
+          <div class="scoreContainer" id="player5score"></div>
+          <div class="scoreContainer" id="player6score"></div>
+          <div class="scoreContainer" id="player7score"></div>
+          <div class="scoreContainer" id="player8score"></div>
+        </div>
+      </div>
+
+      <div id="diceContainer">
+        <div class="dice" id="dice1">1</div>
+        <div class="dice" id="dice2">2</div>
+        <div class="dice" id="dice3">3</div>
+        <div class="dice" id="dice4">4</div>
+        <div class="dice" id="dice5">5</div>
+        <div class="dice" id="dice6">6</div>
+      </div>
+
+      <div id="btnContainer">
+
+        <div id="playBtns">
+          <button id="rollBtn">ROLL DICE</button>
+          <button id="stayBtn">END TURN</button>
+        </div>
+
+        <div id="gameBtns">
+          <button id="scoreBtn">SCORECARD</button>
+          <button id="optionsBtn">OPTIONS</button>
+        </div>
+      </div>
+
+
+    </div>
+
+    <script src="app/app.js"></script>
+  </body>
+</html>

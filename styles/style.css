@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 2rem;
+    color: white;
+    text-align: center;
+    background: linear-gradient(rgb(14, 14, 14), rgb(48, 48, 48));
+    height: 100vh;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+button {
+    margin: 2px;
+    width: 120px;
+    height: 30px;
+    background-color: rgb(49, 57, 63);
+    color: rgb(255, 67, 99);
+    border: 3px solid rgb(69, 89, 104);
+    border-radius: 6px;
+    outline: 0px;
+}
+button:hover, button:active {
+    background-color: rgb(69, 89, 104);
+
+}
+
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+    height: 500px;
+    background: linear-gradient(rgb(0, 0, 0), rgb(26, 30, 32));
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+#diceContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    width: 200px;
+    flex-wrap: wrap;
+}
+
+#btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 280px;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 20px;
+
+}
+
+.dice {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    /* cursor: default; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border: 3px solid rgb(69, 89, 104);
+    border-radius: 10px;
+    background-color: rgb(49, 57, 63);
+    color: rgb(255, 67, 99);
+}
