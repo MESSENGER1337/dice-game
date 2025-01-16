@@ -91,7 +91,7 @@ function rollDice() {
     }
     
     // Move to the next player (cycle back to player 1 after player 8)
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    // currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 }
 
 rollBtn.addEventListener('click', rollDice);
