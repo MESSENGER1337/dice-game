@@ -59,10 +59,8 @@ button:hover, button:active {
 }
 
 .dice {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-    /* cursor: default; */
+    user-select: none;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,4 +72,17 @@ button:hover, button:active {
     border-radius: 10px;
     background-color: rgb(49, 57, 63);
     color: rgb(255, 67, 99);
+    /* transition: background-color 0.2s; */
+
+}
+
+
+
+.dice:hover, .dice:active {
+    background-color: rgb(69, 89, 104);
+}
+
+
+.rolled {
+    
 }
