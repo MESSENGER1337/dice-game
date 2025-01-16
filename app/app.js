@@ -1,10 +1,12 @@
-const players = Array(8).fill({ points: 0, isWinner: false });
+const players = Array.from({ length: 8 }, () => ({ points: 0, isWinner: false }));
 let currentPlayerIndex = 0; // Track the index of the current player
 let rolledArray = [];
 
 const dice = document.getElementsByClassName('dice');
 const diceAll = Array.from(dice);
 const rollBtn = document.getElementById('rollBtn');
+const endTurnBtn = document.getElementById('endTurnBtn');
+
 
 // Define point combinations (example)
 const pointCombinations = {
@@ -74,8 +76,8 @@ function rollDice() {
 
     // Check for points with the updated rolledArray
     const points = checkForPoints(rolledArray);
-    console.log(`You rolled: ${rolledArray}`);
-    console.log(`You scored: ${points}`);
+    console.log(`Player ${currentPlayerIndex + 1} rolled: ${rolledArray}`);
+    console.log(`Player ${currentPlayerIndex + 1} scored: ${points}`);
     
     // Add the points to the current player's total
     players[currentPlayerIndex].points += points;
@@ -91,7 +93,14 @@ function rollDice() {
     }
     
     // Move to the next player (cycle back to player 1 after player 8)
-    // currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 }
 
 rollBtn.addEventListener('click', rollDice);
+
+endTurnBtn.addEventListener('click', () => {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    console.log(`NEW PLAYER: ${currentPlayerIndex + 1}`);
+});
+
+
+
