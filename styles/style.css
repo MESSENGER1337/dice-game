@@ -21,7 +21,9 @@ button {
     border-radius: 6px;
     outline: 0px;
 }
-button:hover, button:active {
+
+button:hover,
+button:active {
     background-color: rgb(69, 89, 104);
 
 }
@@ -65,7 +67,8 @@ button:hover, button:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem;
+    margin: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
@@ -73,20 +76,17 @@ button:hover, button:active {
     border-radius: 10px;
     background-color: rgb(49, 57, 63);
     color: rgb(255, 67, 99);
-    /* transition: background-color 0.2s; */
-
 }
 
 
 
-.dice:hover, .dice:active {
+.dice:hover,
+.dice:active {
     background-color: rgb(69, 89, 104);
 }
 
 
-.rolled {
-    
-}
+.rolled {}
 
 .hidden {
     display: none;
@@ -97,18 +97,53 @@ button:hover, button:active {
 }
 
 
+
+
+/* Modern color palette */
 .dice.straight {
-    background-color: lightblue;
+    background-color: #d4f1f4;
+    /* Soft teal */
+    color: #03506f;
 }
+
 .dice.pair {
-    background-color: lightgreen;
+    background-color: #ffebcd;
+    /* Blanched almond */
+    color: #8b4513;
 }
+
 .dice.threeOfKind {
-    background-color: yellow;
+    background-color: #ffe4e6;
+    /* Light rose */
+    color: #7d0633;
 }
+
 .dice.fourOfKind {
-    background-color: orange;
+    background-color: #f3e8ff;
+    /* Lavender */
+    color: #5a189a;
 }
-.dice.points {
-    background-color: pink;
+
+.dice.fiveOfKind {
+    background-color: #e6ffe6;
+    /* Mint green */
+    color: #2d6a4f;
+}
+
+.dice.pointsOne {
+    background-color: #fff9c4;
+    /* Pale yellow */
+    color: #6d4c41;
+}
+
+.dice.pointsFive {
+    background-color: #d1f7c4;
+    /* Soft lime */
+    color: #4caf50;
+}
+
+/* Add subtle hover effect */
+.dice:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }

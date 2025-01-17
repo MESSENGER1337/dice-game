@@ -70,14 +70,24 @@ function checkForPoints(rolledArray) {
                 });
                 count -= 3;
             }
-            if ((index + 1 === 1 || index + 1 === 5) && count > 0) {
-                points += count * pointCombinations[index + 1];
+            if (index + 1 === 1 && count > 0) {
+                points += count * pointCombinations[1];
                 for (let i = 0; i < count; i++) {
-                    contributingDice.push(index + 1);
+                    contributingDice.push(1);
                 }
                 rolledArray.forEach((value, i) => {
-                    if (value === index + 1 && diceClasses[i] === null) {
-                        diceClasses[i] = 'points';
+                    if (value === 1 && diceClasses[i] === null) {
+                        diceClasses[i] = 'pointsOne';
+                    }
+                });
+            } else if (index + 1 === 5 && count > 0) {
+                points += count * pointCombinations[5];
+                for (let i = 0; i < count; i++) {
+                    contributingDice.push(5);
+                }
+                rolledArray.forEach((value, i) => {
+                    if (value === 5 && diceClasses[i] === null) {
+                        diceClasses[i] = 'pointsFive';
                     }
                 });
             }
@@ -94,6 +104,7 @@ function checkForPoints(rolledArray) {
 
     return points;
 }
+
 
 
 
