@@ -95,3 +95,20 @@ button:hover, button:active {
 .disabled {
     pointer-events: none;
 }
+
+
+.dice.straight {
+    background-color: lightblue;
+}
+.dice.pair {
+    background-color: lightgreen;
+}
+.dice.threeOfKind {
+    background-color: yellow;
+}
+.dice.fourOfKind {
+    background-color: orange;
+}
+.dice.points {
+    background-color: pink;
+}

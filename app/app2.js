@@ -37,6 +37,8 @@ function countDice(rolledArray) {
 function checkForPoints(rolledArray) {
     const counts = countDice(rolledArray);
     let points = 0;
+    const contributingDice = []; // To track dice contributing to the score
+    const diceClasses = Array(diceAll.length).fill(null); // Array to track classes for each die
 
     // Check for specific combinations
     const hasStraight = counts.every(count => count === 1);
@@ -44,26 +46,64 @@ function checkForPoints(rolledArray) {
 
     if (hasStraight) {
         points += pointCombinations.straight;
+        contributingDice.push(...rolledArray); // All dice contribute to a straight
+        diceClasses.fill('straight'); // Assign 'straight' to all dice
     } else if (hasThreePairs) {
         points += pointCombinations.threePairs;
+        contributingDice.push(...rolledArray); // All dice contribute to three pairs
+        rolledArray.forEach((value, i) => {
+            if (counts[value - 1] === 2) {
+                diceClasses[i] = 'pair';
+            }
+        });
     } else {
-        // Check for three-of-a-kinds and single 1's or 5's
+        // Check for three-of-a-kinds, four-of-a-kinds, and single 1's or 5's
         counts.forEach((count, index) => {
             if (count >= 3) {
-                points += pointCombinations.threeOfAKind[index + 1];
-                count -= 3; // Remove counted dice
+                const kindClass = count === 3 ? 'threeOfKind' : count === 4 ? 'fourOfKind' : 'fiveOfKind';
+                points += pointCombinations.threeOfAKind[index + 1] * (count / 3);
+                for (let i = 0; i < count; i++) {
+                    contributingDice.push(index + 1);
+                }
+                rolledArray.forEach((value, i) => {
+                    if (value === index + 1) diceClasses[i] = kindClass;
+                });
+                count -= 3;
             }
-            if (index + 1 === 1 || index + 1 === 5) {
+            if ((index + 1 === 1 || index + 1 === 5) && count > 0) {
                 points += count * pointCombinations[index + 1];
+                for (let i = 0; i < count; i++) {
+                    contributingDice.push(index + 1);
+                }
+                rolledArray.forEach((value, i) => {
+                    if (value === index + 1 && diceClasses[i] === null) {
+                        diceClasses[i] = 'points';
+                    }
+                });
             }
         });
     }
 
+    // Update dice classes
+    diceAll.forEach((die, i) => {
+        die.className = 'dice'; // Reset all classes except the base class
+        if (diceClasses[i]) {
+            die.classList.add(diceClasses[i]);
+        }
+    });
+
     return points;
 }
 
+
+
 function rollDice() {
-    // Clear the rolledArray for the new roll
+
+    // Clear previous highlights
+diceAll.forEach(die => die.classList.remove('highlight'));
+
+
+    rollBtn.classList.add('disabled');
     rolledArray.length = 0;
 
     // Roll each die and update the rolledArray
@@ -74,16 +114,12 @@ function rollDice() {
         rolledArray.push(randomValue); // Add the rolled value to the array
     });
 
-    // Check for points with the updated rolledArray
     const points = checkForPoints(rolledArray);
     console.log(`Player ${currentPlayerIndex + 1} rolled: ${rolledArray}`);
-    console.log(`Player ${currentPlayerIndex + 1} scored: ${points}`);
-    
+        
     // Add the points to the current player's total
     players[currentPlayerIndex].points += points;
 
-    // Update the current player’s total score
-    console.log(`Player ${currentPlayerIndex + 1} total score: ${players[currentPlayerIndex].points}`);
 
     // Check if the current player has won
     if (players[currentPlayerIndex].points >= 10000) {
@@ -98,8 +134,12 @@ function rollDice() {
 rollBtn.addEventListener('click', rollDice);
 
 endTurnBtn.addEventListener('click', () => {
+    // Update the current player’s total score
+    console.log(`Player ${currentPlayerIndex + 1} total score: ${players[currentPlayerIndex].points}`);
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     console.log(`NEW PLAYER: ${currentPlayerIndex + 1}`);
+    console.log(`Player ${currentPlayerIndex + 1} total score: ${players[currentPlayerIndex].points}`);
+
 });
 
 
