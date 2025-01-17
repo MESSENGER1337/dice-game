@@ -87,3 +87,11 @@ button:hover, button:active {
 .rolled {
     
 }
+
+.hidden {
+    display: none;
+}
+
+.disabled {
+    pointer-events: none;
+}
