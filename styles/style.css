@@ -14,7 +14,7 @@ body {
 button {
     margin: 2px;
     width: 120px;
-    height: 30px;
+    height: 36px;
     background-color: rgb(49, 57, 63);
     color: rgb(255, 67, 99);
     border: 3px solid rgb(69, 89, 104);
@@ -55,6 +55,7 @@ button:hover, button:active {
     justify-content: center;
     margin-top: auto;
     margin-bottom: 20px;
+    gap: 5px;
 
 }
 
