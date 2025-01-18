@@ -134,10 +134,10 @@ function checkForPoints(rolledArray) {
 
 
 function rollDice() {
-    // Clear previous highlights and setAside classes
-    diceAll.forEach(die => {
-        die.classList.remove('highlight', 'setAside');
-    });
+
+    // Clear previous highlights
+diceAll.forEach(die => die.classList.remove('highlight'));
+
 
     rollBtn.classList.add('disabled');
     rolledArray.length = 0;
@@ -151,15 +151,19 @@ function rollDice() {
     });
 
     const points = checkForPoints(rolledArray);
-
+   
     // Add the points to the current player's total
     players[currentPlayerIndex].points += points;
+
 
     // Check if the current player has won
     if (players[currentPlayerIndex].points >= 10000) {
         players[currentPlayerIndex].isWinner = true;
         console.log(`Player ${currentPlayerIndex + 1} wins!`);
+        // Add any additional win logic here (e.g., highlight the winner)
     }
+    
+    // Move to the next player (cycle back to player 1 after player 8)
 }
 
 rollBtn.addEventListener('click', rollDice);
@@ -171,49 +175,46 @@ function handleDiceClick(event) {
     // Get the counts of each die value in the rolled array (for complex sets like 3-of-a-kind)
     const counts = countDice(rolledArray);
 
-    // Handle point dice (1 and 5) where toggling is allowed
+    // Check for 6-of-a-kind or a straight and automatically set aside the clicked die
+    if (counts.every(count => count === 1)) {
+        // If it's a straight (all dice are unique), toggle the clicked die's setAside status
+        die.classList.toggle('setAside');
+        return;
+    }
+
+    if (counts[dieValue - 1] === 6) {
+        // If it's 6-of-a-kind, toggle the clicked die's setAside status
+        die.classList.toggle('setAside');
+        return;
+    }
+
+    // If the die is a point die (1 or 5), toggle the `.setAside` class individually
     if (dieValue === 1 || dieValue === 5) {
         die.classList.toggle('setAside');
         return;
     }
 
-    // Check if the clicked die is part of a set (3-of-a-kind, 4-of-a-kind, etc.)
-    const isInSet = counts[dieValue - 1] >= 3;  // Is this die part of a set? (3 or more dice with the same value)
-
-    if (isInSet) {
-        // Get all dice with the same value
-        const diceInSet = diceAll.filter(d => parseInt(d.textContent) === dieValue);
-
-        // Check if all dice in the set are already set aside
-        const allSetAside = diceInSet.every(d => d.classList.contains('setAside'));
-
-        if (allSetAside) {
-            // If all are set aside, remove the `.setAside` class from all dice in the set
-            diceInSet.forEach(d => d.classList.remove('setAside'));
-        } else {
-            // Otherwise, add the `.setAside` class to all dice in the set
-            diceInSet.forEach(d => d.classList.add('setAside'));
-        }
+    // Check for 3-of-a-kind, 4-of-a-kind, 5-of-a-kind (not counting 1's and 5's in this case)
+    if (counts[dieValue - 1] >= 3 && dieValue !== 1 && dieValue !== 5) {
+        // If clicked die is part of a combination, toggle the `.setAside` class
+        die.classList.toggle('setAside');
     }
 
-    // Check for THREE PAIRS combination
-    const pairs = counts.filter(count => count === 2).length;
-    if (pairs === 3) {
-        // For each pair (two dice with the same value), toggle the .setAside class
-        counts.forEach((count, index) => {
-            if (count === 2) {
-                const diceInPair = diceAll.filter(d => parseInt(d.textContent) === index + 1);
-                diceInPair.forEach(d => d.classList.toggle('setAside'));
-            }
-        });
+    // Handle cases for 3-pair (just for pairs of two)
+    if (counts[dieValue - 1] === 2) {
+        die.classList.toggle('setAside');
     }
-
-    // Check for STRAIGHT combination (all dice values are unique)
-    if (counts.every(count => count === 1)) {
-        // If all dice are unique, toggle .setAside class on all dice involved in the straight
-        diceAll.forEach(die => die.classList.toggle('setAside'));
+    
+    // Simplified check for larger sets like 4-of-a-kind or 5-of-a-kind
+    if (counts[dieValue - 1] === 4 || counts[dieValue - 1] === 5) {
+        die.classList.toggle('setAside');
     }
 }
+
+
+
+
+
 
 
 
@@ -221,8 +222,6 @@ function handleDiceClick(event) {
 diceAll.forEach(die => {
     die.addEventListener('click', handleDiceClick);
 });
-
-
 
 
 
