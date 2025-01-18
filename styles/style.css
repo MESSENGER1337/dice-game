@@ -147,3 +147,8 @@ button:active {
     transform: scale(1.05);
     filter: brightness(1.1);
 }
+
+.setAside {
+    opacity: 0.5; /* Makes the die look like it's set aside */
+    background-color: #ccc; /* Optionally change the background color */
+}
